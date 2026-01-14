@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     //Define the data storage
     let expenses = [];
 
+    let categoryChart = null;
+    let monthlyChart = null;
+
+
     //Save to Local Storage
     function saveExpenses(){
         localStorage.setItem(STORAGE_KEY,JSON.stringify(expenses));
@@ -137,10 +141,70 @@ document.addEventListener("DOMContentLoaded", function() {
         return summary;
     }
 
+    function renderCategoryChart(summary){
+        const labels = Object.keys(summary);
+        const data = Object.values(summary);
 
+        if(categoryChart){
+            categoryChart.destroy();
+        }
+
+        categoryChart = new Chart(document.getElementById("categoryChart"),{
+            type: "pie",
+            data:{
+                labels: labels,
+                datasets: [{
+                    data: data
+                }]
+            }
+        })
+    }
+
+    function getMonthlySummary(){
+        const monthly = {};
+
+        expenses.forEach(exp => {
+            const month = new Date(exp.date).toLocaleString('default',{
+                month: 'short'
+            });
+
+            if(monthly[month]){
+                monthly[month] += Number(exp.amount);
+            }else{
+                monthly[month] = Number(exp.amount);
+            }
+        });
+
+        return monthly;
+    }
+
+    function renderMonthlyChart(monthlyData){
+        if(monthlyChart){
+            monthlyChart.destroy();
+        }
+
+        monthlyChart = new Chart(document.getElementById("monthlyChart"),{
+            type: "bar",
+        data: {
+            labels: Object.keys(monthlyData),
+            datasets: [{
+                data: Object.values(monthlyData)
+            }]
+        }
+        });
+    }
 
     function updateDashboard() {
     calculateTotal();
+
+    const categoryData = categorySummary();
+
+    renderCategoryChart(categoryData);
+
+    const monthlyData = getMonthlySummary();
+
+    renderMonthlyChart(monthlyData);
+
     categorySummary();
     }
 
