@@ -1,0 +1,240 @@
+:root {
+    --bg-dark: #0f172a;       /* Deep Dark Blue */
+    --bg-card: #1e293b;       /* Lighter Dark Blue for cards */
+    --accent-green: #22c55e;  /* Vibrant Green */
+    --text-light: #f8fafc;    /* Off-white */
+    --text-dim: #94a3b8;      /* Muted Gray-blue */
+    --danger: #ef4444;        /* Red for delete/actions */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center; 
+    gap: 15px;           
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    height: 50px;       
+    width: auto;         
+    display: block;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+h1 span {
+    color: var(--accent-green);
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Card Styling */
+.card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.highlight {
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Layout Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+label {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: var(--text-dim);
+}
+
+input, select {
+    background: #334155;
+    border: 1px solid #475569;
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--accent-green);
+}
+
+.btn-main {
+    background: var(--accent-green);
+    color: #052e16; /* Dark text for contrast */
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-main:hover {
+    background: #4ade80; /* Brighter green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-main:active {
+    transform: translateY(0);
+}
+
+.btn-delete {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+/* Table Styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    text-align: left;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #334155;
+}
+
+/* Summary Styling */
+.total {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#totalAmount{
+    color: var(--accent-green);
+}
+
+#totalAmount::before {
+    color: var(--accent-green);
+    margin-right: 2px;
+}
+
+#categoryList {
+    list-style: none;
+    margin-top: 10px;
+}
+
+#categoryList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+}
+
+#categoryList li span:last-child {
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+/* Chart Canvas */
+canvas {
+    max-width: 100%;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        justify-content: center;
+    }
+    .logo img {
+        max-width: 150px;
+    }
+}

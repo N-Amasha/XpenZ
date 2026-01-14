@@ -1,52 +1,82 @@
-# XpenZ – Expense Tracker
-
-XpenZ is a simple web-based expense tracker built using HTML and JavaScript.  
-It allows users to add expenses and view them dynamically in a table.
+# XpenZ – Expense Tracker with Visual Insights
+A JavaScript-based web application that tracks expenses, calculates insights, and visualizes spending trends.
 
 ---
 
-## Features (Current)
-
-- Add expenses using a form
-- Expense data stored in a JavaScript array
-- Dynamic expense table rendering
-- Basic input validation
-- Clean DOM manipulation (no frameworks)
+# Project Overview 
+XpenZ allows users to add, view, and analyze expenses in real-time. Users can:
+- Add, edit, and delete expenses
+- See total and category-wise spending
+- Get monthly summaries and highest spending alerts
+- Visualize data with pie and bar charts
 
 ---
 
-## Technologies Used
+# Features
+Expense input with amount, category, date, description
+Persistent data using LocalStorage
+Category-wise and monthly summaries
+Interactive charts (Chart.js)
+Highest spending alert
 
-- HTML5
+---
+
+# Technologies Used
+- HTML5, CSS3
 - JavaScript (Vanilla JS)
-- DOM Manipulation
+- Chart.js
+- LocalStorage
 
 ---
 
-## Project Structure
-Project3_XpenZ/
+# Folder Structure
+
+XpenZ/
 │
 ├── index.html
-├── app.js
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   └── charts.js
+├── assets/
+│   └── screenshots/
 └── README.md
 
 ---
 
-## Current Progress
+## Screenshots
 
-✔ UI layout completed  
-✔ Expense input logic implemented  
-✔ Dynamic table rendering working  
+### Expense Input
+![Expense Table](assets/screenshots/expense-input.png)
 
-Planned next:
-- Delete expense
-- Expense summary
-- Visual charts
+### Expense Table
+![Expense Table](assets/screenshots/expense-table.png)
+
+### Analytics Chart
+![Analytics Chart](assets/screenshots/category-chart(1).png)
+![Analytics Chart](assets/screenshots/category-chart(2).png)
+![Analytics Chart](assets/screenshots/category-chart(3).png)
+
+### Full View - Homepage
+![Homepage](assets/screenshots/home(1).png)
+![Homepage](assets/screenshots/home(2).png)
 
 ---
 
-## How to Run
+# How to Use
+- Open index.html in browser
+- Add expenses using the input form
+- View updated table, summaries, and charts
+- Delete expenses if needed
 
-1. Clone the repository
-2. Open `index.html` in any modern browser
-3. Add expenses using the form
+---
+
+# Future Enhancements
+- Add user authentication
+- Export monthly reports as CSV
+- Dark mode toggle
+- Budget limit alerts
+
+
+
