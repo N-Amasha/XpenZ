@@ -45,6 +45,7 @@
                         <th>Category</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +56,13 @@
 
         <section id="summery">
             <h2>Summery</h2>
-            <p>Total Expenses: $0</p>
+            <p>Total Expenses: $<span id="totalAmount">0</span></p>
+            <div id="category-summary">
+                <h3>Category-wise Summary:</h3>
+                <ul id="categoryList">
+                
+                </ul>
+            </div>
         </section>
 
         <section id="chart">

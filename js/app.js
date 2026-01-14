@@ -88,8 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Render Expense Table - Update UI
     function renderExpenses(){
-        //Clear existing rows
-        tableBody.innerHTML = "";
+        tableBody.innerHTML = "";//Clear existing rows
 
         //Loop through expenses array
         expenses.forEach(function(expense){
@@ -99,11 +98,58 @@ document.addEventListener("DOMContentLoaded", function() {
             <td>${expense.category}</td>
             <td>${expense.date}</td>
             <td>${expense.description}</td>
+            <td>
+                <button onclick="deleteExpense(${expense.id})">Delete</button>
+            </td>
             `;
             tableBody.appendChild(row);
-        })
+        });
+        updateDashboard();//Update totals whenever table renders
     }
 
+    function calculateTotal(){
+        let total = expenses.reduce((sum,exp) => sum + Number(exp.amount),0);
+
+        document.getElementById('totalAmount').textContent = total;
+    }
+
+
+    function categorySummary(){
+        const summary = {};
+        expenses.forEach(exp => {
+            if(summary[exp.category]){
+                summary[exp.category] += Number(exp.amount);
+            }else{
+                summary[exp.category] = Number(exp.amount);
+            }
+        });
+
+        //Update HTML list
+        const categoryList = document.getElementById('categoryList');
+        categoryList.innerHTML = "";
+
+        for(let cat in summary){
+            const li = document.createElement('li');
+            li.textContent = `${cat}: $${summary[cat]}`;
+            categoryList.appendChild(li);
+        }
+
+        return summary;
+    }
+
+
+
+    function updateDashboard() {
+    calculateTotal();
+    categorySummary();
+    }
+
+
+    window.deleteExpense = function(id){
+        expenses = expenses.filter(exp => exp.id!== id);
+        saveExpenses();
+        renderExpenses();
+    }
 
 loadExpenses();
 renderExpenses();
