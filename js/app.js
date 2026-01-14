@@ -1,3 +1,20 @@
+const STORAGE_KEY = "xpenzExpenses";
+
+function saveExpenses(){
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(expenses));
+}
+
+function localStorage(){
+    const storedData = localStorage.getItem(STORAGE_KEY);
+
+    if(storedData){
+        expenses = JSON.parse(storedData);
+    }else{
+        expenses = [];
+    }
+
+}
+
 //Define the data storage
 let expenses = [];
 
@@ -60,6 +77,9 @@ function addExpense(){
     //Store in array
     expenses.push(expense);
 
+    //Save Expenses
+    saveExpenses();
+
     //Update UI
     renderExpenses();
 
@@ -90,3 +110,5 @@ function renderExpenses(){
 form.reset();
 amountInput.focus();
 
+loadExpenses();
+renderExpenses();
