@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-        const STORAGE_KEY = "xpenzExpenses";
+    const STORAGE_KEY = "xpenzExpenses";
+    const MONTHLY_LIMIT = 50000;
 
     //Define the data storage
     let expenses = [];
@@ -94,6 +95,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function renderExpenses(){
         tableBody.innerHTML = "";//Clear existing rows
 
+        if (expenses.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="5">No expenses yet</td></tr>`;
+            updateDashboard();
+            return;
+        }
+
         //Loop through expenses array
         expenses.forEach(function(expense){
             const row = document.createElement("tr");
@@ -108,7 +115,9 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
             tableBody.appendChild(row);
         });
+
         updateDashboard();//Update totals whenever table renders
+
     }
 
     function calculateTotal(){
@@ -134,11 +143,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
         for(let cat in summary){
             const li = document.createElement('li');
-            li.textContent = `${cat}: $${summary[cat]}`;
+            li.textContent = `${cat}: ${summary[cat]}`;
             categoryList.appendChild(li);
         }
 
         return summary;
+    }
+
+    function updateInsight(){
+        const insightBox = document.getElementById("insightBox");
+        const summary = categorySummary();
+        const {maxCategory,maxAmount} = getHighestSpendingCategory(summary);
+
+        if(!maxCategory){
+            insightBox.textContent = "No expenses recorded yet.";
+            insightBox.style.color = "gray";
+            return;
+        }
+
+        let message = `Highest spending category: ${maxCategory} (Rs. ${maxAmount})`;
+
+        if (maxAmount > MONTHLY_LIMIT) {
+            message += " Spending limit exceeded!";
+            insightBox.style.color = "red";
+        } else {
+            insightBox.style.color = "darkred";
+        }
+
+        insightBox.textContent = message;
+    }
+
+
+    function getHighestSpendingCategory(summary){
+        let maxCategory = null;
+        let maxAmount = 0;
+
+        for(let category in summary){
+            if(summary[category] > maxAmount){
+                maxAmount = summary[category];
+                maxCategory = category;
+            }
+        }
+
+        return {maxCategory,maxAmount};
     }
 
     function renderCategoryChart(summary){
@@ -195,17 +242,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateDashboard() {
-    calculateTotal();
+        calculateTotal();
 
-    const categoryData = categorySummary();
+        const categoryData = categorySummary();
+        renderCategoryChart(categoryData);
 
-    renderCategoryChart(categoryData);
+        const monthlyData = getMonthlySummary();
+        renderMonthlyChart(monthlyData);
 
-    const monthlyData = getMonthlySummary();
+        updateInsight();
 
-    renderMonthlyChart(monthlyData);
+        if (expenses.length === 0) {
+        if (categoryChart) categoryChart.destroy();
+        if (monthlyChart) monthlyChart.destroy();
+        return;
+    }
 
-    categorySummary();
     }
 
 
