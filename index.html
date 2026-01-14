@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XpenZ | Home Page</title>
+</head>
+<body>
+    <header>
+
+        <h1>XpenZ</h1>
+
+        <section id="expense-form">
+            <h2>Add Expense</h2>
+            <form action="">
+
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount">
+
+                <label for="category">Category:</label>
+                <select name="category" id="category">
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="others">Others</option>
+                </select>
+
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date">
+
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description">
+
+                <button type="submit">Add Expense</button>
+
+            </form>
+        </section>
+
+        <section id="expense-list">
+            <h2>Expenses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Expense will go here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="summery">
+            <h2>Summery</h2>
+            <p>Total Expenses: $0</p>
+        </section>
+
+        <section id="chart">
+            <h2>Expense Chart</h2>
+            <div id="chart-container">
+                <!-- Chart will render here -->
+            </div>
+        </section>
+    </header>
+    
+    <script src="app.js"></script>
+
+</body>
+</html>
